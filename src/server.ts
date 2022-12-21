@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { filterImageFromURL, deleteLocalFiles } from './util/util';
-import { filter } from 'bluebird';
+import { Response, Request } from 'express';
 
 (async () => {
 
@@ -34,12 +34,12 @@ import { filter } from 'bluebird';
 
   // Root Endpoint
   // Displays a simple message to the user
-  app.get("/", async (req, res) => {
+  app.get("/", async (req: Request, res: Response) => {
     res.send("try GET /filteredimage?image_url={{}}")
   });
 
 
-  app.get("/filteredimage", async (req, res) => {
+  app.get("/filteredimage", async (req: Request, res: Response) => {
     const URL = req.query.image_url.toString();
     if (!URL) {
       res.status(400).send({ message: 'Please enter the image url' });
